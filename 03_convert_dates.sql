@@ -2,9 +2,8 @@ USE ecommerce_clv;
 
 ALTER TABLE retail_raw ADD COLUMN InvoiceDate_new DATETIME;
 
--- Takes a few minutes on 1M+ rows (raise the Workbench read timeout if the connection drops)
 UPDATE retail_raw
-SET InvoiceDate_new = STR_TO_DATE(InvoiceDate, '%m/%d/%Y %H:%i');
+SET InvoiceDate_new = STR_TO_DATE(InvoiceDate, '%m/%d/%Y %H:%i');  -- Update the Invoice date from varchar to datetime
 
 -- Must return 0 before running the swap below
 SELECT COUNT(*) FROM retail_raw WHERE InvoiceDate_new IS NULL;
